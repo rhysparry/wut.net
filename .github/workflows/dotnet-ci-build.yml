@@ -1,0 +1,30 @@
+name: .NET CI Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    env:
+      BUILD_CONFIGURATION: Debug
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: "Install tools"
+        uses: taiki-e/install-action@v2
+        with:
+          tool: just@1.42.4.0,git-cliff@2.10.0
+      - name: Test
+        run: just test

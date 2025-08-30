@@ -1,0 +1,28 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wut.Net.Tests", "Wut.Net.Tests\Wut.Net.Tests.csproj", "{6F0D9A4D-7522-4D2E-9381-E4BC1FCB1FB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wut.Net.Newtonsoft.Json.Tests", "Wut.Net.Newtonsoft.Json.Tests\Wut.Net.Newtonsoft.Json.Tests.csproj", "{AB77DC0D-6987-4F5C-852F-9A94C75D1FF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F0D9A4D-7522-4D2E-9381-E4BC1FCB1FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0D9A4D-7522-4D2E-9381-E4BC1FCB1FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0D9A4D-7522-4D2E-9381-E4BC1FCB1FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0D9A4D-7522-4D2E-9381-E4BC1FCB1FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB77DC0D-6987-4F5C-852F-9A94C75D1FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB77DC0D-6987-4F5C-852F-9A94C75D1FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB77DC0D-6987-4F5C-852F-9A94C75D1FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB77DC0D-6987-4F5C-852F-9A94C75D1FF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
