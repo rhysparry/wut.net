@@ -143,6 +143,7 @@ justfile
 
 ### Code Quality
 - C# code formatting is handled automatically by csharpier during pre-commit
+- All files must end with a newline character (enforced by end-of-file-fixer pre-commit hook)
 - All changes must pass pre-commit hooks to merge
 - Follow existing test patterns: descriptive names, XML summaries, focused assertions
 - Keep tests small, focused, and deterministic
