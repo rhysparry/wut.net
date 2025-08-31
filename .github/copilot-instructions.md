@@ -21,7 +21,7 @@ Always use the configuration files as the source of truth for version requiremen
    ```bash
    # For core tests
    cat Wut.Net.Tests/Wut.Net.Tests.csproj
-   # For JSON-specific tests  
+   # For JSON-specific tests
    cat Wut.Net.Newtonsoft.Json.Tests/Wut.Net.Newtonsoft.Json.Tests.csproj
    ```
 
