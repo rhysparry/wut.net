@@ -4,21 +4,52 @@ Always reference these instructions first and fallback to search or bash command
 
 ## Working Effectively
 
+### Discovering Version Information
+Always use the configuration files as the source of truth for version requirements:
+
+1. **Check .NET SDK version**:
+   ```bash
+   cat global.json
+   ```
+
+2. **Check tool versions**:
+   ```bash
+   cat dotnet-tools.json
+   ```
+
+3. **Check package versions**:
+   ```bash
+   # For core tests
+   cat Wut.Net.Tests/Wut.Net.Tests.csproj
+   # For JSON-specific tests
+   cat Wut.Net.Newtonsoft.Json.Tests/Wut.Net.Newtonsoft.Json.Tests.csproj
+   ```
+
+4. **Check target framework**:
+   ```bash
+   grep -r "TargetFramework" *.csproj */*.csproj
+   ```
+
 ### Prerequisites and Installation
 Before building the code, install the required tools and SDKs:
 
-1. **Install .NET 9 SDK**:
+1. **Install .NET 9 SDK** (check `global.json` for exact version):
    ```bash
-   curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 9.0.203
+   # Get the required SDK version from global.json
+   SDK_VERSION=$(cat global.json | grep -o '"version":\s*"[^"]*"' | cut -d'"' -f4)
+   curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version $SDK_VERSION
    ```
 
-2. **Install .NET 9 Runtime** (if tests fail with runtime not found):
+2. **Install .NET 9 Runtime** (if tests fail with runtime not found, use same version as SDK):
    ```bash
-   curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --runtime dotnet --version 9.0.4
+   # Use the same version as specified in global.json
+   SDK_VERSION=$(cat global.json | grep -o '"version":\s*"[^"]*"' | cut -d'"' -f4)
+   curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --runtime dotnet --version $SDK_VERSION
    ```
 
-3. **Install just task runner**:
+3. **Install just task runner** (use latest release or specific version as needed):
    ```bash
+   # Get latest version from GitHub releases or specify a particular version
    wget -qO- https://github.com/casey/just/releases/download/1.42.0/just-1.42.0-x86_64-unknown-linux-musl.tar.gz | tar xvz -C /tmp && sudo mv /tmp/just /usr/local/bin/
    ```
 
@@ -70,7 +101,7 @@ Always run these commands before committing changes to ensure CI passes:
 
 ### Solution Overview
 - **Wut.Net.sln**: Main solution file containing two test projects
-- **global.json**: Specifies .NET 9.0.203 SDK requirement
+- **global.json**: Specifies .NET SDK version requirement (currently 9.0.304)
 - **justfile**: Task runner configuration (similar to Makefile)
 
 ### Test Projects
@@ -81,11 +112,11 @@ Always run these commands before committing changes to ensure CI passes:
 
 2. **Wut.Net.Newtonsoft.Json.Tests**: Newtonsoft.Json library behavior tests
    - Target framework: net9.0
-   - Includes Newtonsoft.Json 13.0.3 package reference
+   - Package dependencies defined in project file (check .csproj for current versions)
    - Tests JSON serialization behaviors, immutable types, required properties
 
 ### Configuration Files
-- **dotnet-tools.json**: Defines csharpier 1.0.2 for code formatting
+- **dotnet-tools.json**: Defines tool versions (check for csharpier and other tools)
 - **.pre-commit-config.yaml**: Pre-commit hooks for code quality
 - **.github/workflows/**: CI/CD pipelines (dotnet-ci-build.yml, pre-commit.yml)
 
@@ -121,11 +152,11 @@ justfile
 ```
 
 **Package references used**:
-- xunit.v3 3.0.1
-- xunit.runner.visualstudio 3.1.4
-- Microsoft.NET.Test.Sdk 17.14.1
-- coverlet.collector 6.0.4
-- Newtonsoft.Json 13.0.3 (Newtonsoft.Json.Tests project only)
+Check the project files (.csproj) for current package versions:
+- `Wut.Net.Tests/Wut.Net.Tests.csproj` for core test dependencies
+- `Wut.Net.Newtonsoft.Json.Tests/Wut.Net.Newtonsoft.Json.Tests.csproj` for JSON-specific dependencies
+- Common packages include: xunit.v3, xunit.runner.visualstudio, Microsoft.NET.Test.Sdk, coverlet.collector
+- Newtonsoft.Json package is used in the JSON tests project only
 
 ## Important Notes
 
