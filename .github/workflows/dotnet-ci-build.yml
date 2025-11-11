@@ -27,6 +27,6 @@ jobs:
       - name: "Install tools"
         uses: taiki-e/install-action@v2
         with:
-          tool: just@1.42.4,git-cliff@2.10.0
+          tool: just@1.43.0,git-cliff@2.10.1
       - name: Test
         run: just test
