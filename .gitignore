@@ -1,3 +1,5 @@
 bin/
 obj/
 *.user
+*.orig
+.idea/*/.idea/copilot.data.migration.*.xml
